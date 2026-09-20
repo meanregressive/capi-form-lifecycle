@@ -1,0 +1,82 @@
+# DOCX DUMP (tracked changes accepted): 1_school_head_EN.docx
+
+DEMO PRIMARY SCHOOL SURVEY — ROUND 2 (2026)
+INSTRUMENT 1: SCHOOL HEAD QUESTIONNAIRE
+Fictional instrument for the capi-form-lifecycle starter example. All names and places are invented. Version 20260105.
+SECTION A. Identification
+
+--- TABLE ---
+| Code | Question | Response |
+| A01 | School ID | Enter the 4-digit school ID from the assignment sheet. |
+| A02 | School name | Prefilled |
+| A03 | District | Prefilled |
+| A04 | Village | Prefilled |
+--- /TABLE ---
+
+Enumerator, confirm before continuing: School ID ${A01} · School ${A02} · District ${A03}.
+
+--- TABLE ---
+| Code | Question | Response |
+| A05 | Enumerator | List |
+| A06 | Name of the respondent (school head) |  |
+--- /TABLE ---
+
+My name is ${A05}. I work for a research team studying primary schools. The interview takes about 20 minutes. Your answers are confidential and you may stop at any time.
+
+--- TABLE ---
+| Code | Question | Response |
+| consent | Do you agree to participate? | 1 = Yes / 2 = No |
+--- /TABLE ---
+
+SECTION B. Respondent
+
+--- TABLE ---
+| Code | Question | Response |
+| B01 | Sex of the respondent | 1 = Male / 2 = Female |
+| B02 | Age (years) | If unknown, write -99. |
+| B03 | Years as head of this school | 0 if less than one year. |
+| B04 | Mobile phone number | 9 digits. If no phone, write -99. |
+| B05 | Highest level of education completed | 1 = Primary / 2 = Secondary / 3 = Teacher training college / 4 = University / 99 = Other, specify |
+| B05.1 | Other, specify: |  |
+| B06 | Does your phone have internet access? [[C0]]  [[C1]] | 1 = Yes / 2 = No |
+--- /TABLE ---
+
+SECTION C. School and school feeding
+
+--- TABLE ---
+| Code | Question | Response |
+| C01 | How many pupils are enrolled this school year? | /__/__/__/ |
+| C02 | Does the school have a school feeding program? | 1 = Yes / 2 = No / If No >> Section D |
+| C03 | Who provides the meals? | 1 = Government program / 2 = NGO / 3 = Community / 4 = Parents' association / 99 = Other, specify |
+| C03.1 | Other, specify: |  |
+| C04 | On how many days per week are meals served? | /__/__/__/ |
+--- /TABLE ---
+
+SECTION D. Teachers
+
+--- TABLE ---
+| Code | Question | Response |
+| D01 | How many teachers teach at this school? | /__/__/__/ |
+--- /TABLE ---
+
+Teacher list (repeat for each teacher)
+
+--- TABLE ---
+| Code | Question | Response |
+| D02 | Name of teacher ${t_index} |  |
+| D03 | Sex | 1 = Male / 2 = Female |
+| D04 | Teaches reading in grade 3? | 1 = Yes / 2 = No |
+--- /TABLE ---
+
+SECTION E. School council
+
+--- TABLE ---
+| Code | Question | Response |
+| E01 | Does the school have a school council? | 1 = Yes / 2 = No / If No >> End |
+| E03 | Which issues did the council discuss this year? | 1 = Pupil attendance / 2 = School meals / 3 = Infrastructure / 4 = Teacher performance / 5 = None of these |
+--- /TABLE ---
+
+
+=== COMMENTS (anchored inline as [[C<id>]]; 'reply to' = thread parent) ===
+[C0] PI (fictional) 2026-01-03: New question for Round 2: we need to know whether heads can receive the monthly bulletin by WhatsApp. Skip if no phone.
+[C1] Programmer (fictional) 2026-01-04 (reply to C0): Agreed. Will add as B06 with relevance on B04 not equal to -99.

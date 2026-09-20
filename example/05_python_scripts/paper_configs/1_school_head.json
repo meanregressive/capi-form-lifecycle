@@ -1,0 +1,12 @@
+{
+  "titles": {
+    "EN": "DEMO PRIMARY SCHOOL SURVEY — SCHOOL HEAD QUESTIONNAIRE",
+    "PT": "INQUÉRITO DEMO ÀS ESCOLAS PRIMÁRIAS — QUESTIONÁRIO DO(A) DIRECTOR(A)"
+  },
+  "var_labels": {
+    "A05": {
+      "EN": "the enumerator",
+      "PT": "o(a) inquiridor(a)"
+    }
+  }
+}

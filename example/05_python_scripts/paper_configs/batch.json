@@ -1,0 +1,12 @@
+{
+  "out": "../../06_output_paper_FROMCAPI",
+  "langs": "EN=label:ENG,PT=label",
+  "suffix": "FROMCAPI_r1",
+  "forms": [
+    {
+      "form": "../../03_input_prior_capi/1_school_head_r1_v1.xlsx",
+      "base": "1_school_head",
+      "config": "1_school_head.json"
+    }
+  ]
+}

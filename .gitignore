@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
+~$*
+
+# starter example: outputs the modes and run_checks.py write (regenerated on demand)
+example/06_output_paper_FROMCAPI/
+example/04_output_r2_capi/v*/
+example/05_python_scripts/_*.py

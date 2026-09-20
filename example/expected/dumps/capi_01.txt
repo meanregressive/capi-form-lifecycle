@@ -1,0 +1,81 @@
+# XLSX DUMP (XLSForm): 1_school_head_r1_v1.xlsx
+
+=== SETTINGS ===
+form_title: #1 - Questionário do(a) Director(a) da Escola — Ronda 1
+form_id: school_head_r1_v1
+version: 2501150001
+default_language: POR
+
+=== SURVEY (row: [type] name | ENG: label | L2: label || extras) ===
+r2: [start] starttime
+r3: [end] endtime
+r4: [deviceid] deviceid
+r5: [subscriberid] subscriberid
+r6: [simserial] simid
+r7: [phonenumber] devicephonenum
+r8: [begin group] section_a | ENG: SECTION A. Identification | L2: SECÇÃO A. Identificação
+r9: [integer] A01 | ENG: A01. School ID | L2: A01. Código da escola  || constraint=.>=1000 and .<=9999 ; req=yes ; hintENG=Enter the 4-digit school ID from the assignment sheet. ; hint=Introduza o código de 4 dígitos da escola. ; cmsgENG=School ID has 4 digits. ; cmsg=O código da escola tem 4 dígitos.
+r10: [calculate] A02 | ENG: A02. School name | L2: A02. Nome da escola  || calc=pulldata('upload_school', 'school_name', 'school_id_key', ${A01})
+r11: [calculate] A03 | ENG: A03. District | L2: A03. Distrito  || calc=pulldata('upload_school', 'district', 'school_id_key', ${A01})
+r12: [note] A07 | ENG: Enumerator, confirm before continuing: School ID ${A01} · School ${A02} · District ${A03}. | L2: Inquiridor(a), confirme antes de continuar: Código ${A01} · Escola ${A02} · Distrito ${A03}.
+r13: [enumerator] A05 | ENG: A05. Enumerator | L2: A05. Inquiridor(a)  || req=yes
+r14: [text] A06 | ENG: A06. Name of the respondent (school head) | L2: A06. Nome do(a) respondente (director(a) da escola)  || constraint=regex(., "^[A-Za-zÀ-ÿ '’.-]+$") ; req=yes ; cmsgENG=Letters and spaces only. ; cmsg=Apenas letras e espaços.
+r15: [note] consent_note | ENG: My name is ${A05}. I work for a research team studying primary schools. The interview takes about 20 minutes. Your answers are confidential and you may stop at any time. | L2: O meu nome é ${A05}. Trabalho para uma equipa de pesquisa sobre escolas primárias. A entrevista dura cerca de 20 minutos. As suas respostas são confidenciais e pode parar a qualquer momento.
+r16: [select_one yesno] consent | ENG: Do you agree to participate? | L2: Concorda em participar?  || req=yes
+r17: [end group] section_a
+r18: [begin group] survey  || rel=${consent}=1
+r19: [begin group] section_b | ENG: SECTION B. Respondent | L2: SECÇÃO B. Respondente
+r20: [select_one sex] B01 | ENG: B01. Sex of the respondent | L2: B01. Sexo do(a) respondente  || req=yes
+r21: [integer] B02 | ENG: B02. Age (years) | L2: B02. Idade (anos)  || constraint=.=-99 or (.>=18 and .<=99) ; req=yes ; hintENG=If unknown, write -99. ; hint=Se desconhecida, escreva -99. ; cmsgENG=Age 18–99, or -99. ; cmsg=Idade 18–99, ou -99.
+r22: [integer] B03 | ENG: B03. Years as head of this school | L2: B03. Anos como director(a) desta escola  || constraint=.>=0 and (.<=${B02} or ${B02}=-99) ; req=yes ; hintENG=0 if less than one year. ; hint=0 se menos de um ano. ; cmsgENG=Cannot exceed age. ; cmsg=Não pode exceder a idade.
+r23: [integer] B04 | ENG: B04. Mobile phone number | L2: B04. Número de telemóvel  || constraint=(.>=100000000 and .<=999999999) or .=-99 ; req=yes ; hintENG=9 digits. If no phone, write -99. ; hint=9 dígitos. Se não tem telefone, escreva -99. ; cmsgENG=9 digits or -99. ; cmsg=9 dígitos ou -99.
+r24: [select_one education] B05 | ENG: B05. Highest level of education completed | L2: B05. Nível de escolaridade mais elevado concluído  || req=yes
+r25: [text] B05_o | ENG: B05.1. Other, specify: | L2: B05.1. Outro, especifique:  || rel=${B05}=-77 ; req=yes
+r26: [end group] section_b
+r27: [begin group] section_c | ENG: SECTION C. School and school feeding | L2: SECÇÃO C. Escola e alimentação escolar
+r28: [integer] C01 | ENG: C01. How many pupils are enrolled? | L2: C01. Quantos alunos estão matriculados?  || constraint=.>=0 and .<=5000 ; req=yes ; cmsgENG=0–5000. ; cmsg=0–5000.
+r29: [select_one yesno] C02 | ENG: C02. Does the school have a school feeding program? | L2: C02. A escola tem um programa de alimentação escolar?  || req=yes
+r30: [select_one meal_provider] C03 | ENG: C03. Who provides the meals? | L2: C03. Quem fornece as refeições?  || rel=${C02}=1 ; req=yes
+r31: [text] C03_o | ENG: C03.1. Other, specify: | L2: C03.1. Outro, especifique:  || rel=${C02}=1 and ${C03}=-77 ; req=yes
+r32: [integer] C04 | ENG: C04. On how many days per week are meals served? | L2: C04. Em quantos dias por semana são servidas refeições?  || rel=${C02}=1 ; constraint=.>=0 and .<=7 ; req=yes ; cmsgENG=0–7. ; cmsg=0–7.
+r33: [end group] section_c
+r34: [begin group] section_d | ENG: SECTION D. Teachers | L2: SECÇÃO D. Professores
+r35: [integer] D01 | ENG: D01. How many teachers teach at this school? | L2: D01. Quantos professores ensinam nesta escola?  || constraint=.>=0 and .<=50 ; req=yes ; cmsgENG=0–50. ; cmsg=0–50.
+r36: [begin repeat] teacher_list | ENG: Teacher list | L2: Lista de professores  || repeat=${D01}
+r37: [calculate] t_index  || calc=index()
+r38: [text] D02 | ENG: D02. Name of teacher ${t_index} | L2: D02. Nome do(a) professor(a) ${t_index}  || constraint=regex(., "^[A-Za-zÀ-ÿ '’.-]+$") ; req=yes ; cmsgENG=Letters and spaces only. ; cmsg=Apenas letras e espaços.
+r39: [select_one sex] D03 | ENG: D03. Sex | L2: D03. Sexo  || req=yes
+r40: [select_one yesno] D04 | ENG: D04. Teaches reading in grade 3? | L2: D04. Ensina leitura na 3.ª classe?  || req=yes
+r41: [end repeat] teacher_list
+r42: [end group] section_d
+r43: [begin group] section_e | ENG: SECTION E. School council | L2: SECÇÃO E. Conselho de escola
+r44: [select_one yesno] E01 | ENG: E01. Does the school have a school council? | L2: E01. A escola tem um conselho de escola?  || req=yes
+r45: [integer] E02 | ENG: E02. How many times did the council meet last term? | L2: E02. Quantas vezes o conselho se reuniu no último trimestre?  || rel=${E01}=1 ; constraint=.>=0 and .<=20 ; req=yes ; cmsgENG=0–20. ; cmsg=0–20.
+r46: [select_multiple council_issues] E03 | ENG: E03. Which issues did the council discuss this year? | L2: E03. Que assuntos o conselho discutiu este ano?  || rel=${E01}=1 ; constraint=not(selected(., '5')) or count-selected(.)=1 ; req=yes ; hintENG=More than one option can be selected. ; hint=Pode seleccionar mais do que uma opção. ; cmsgENG='None of these' cannot be combined with other options. ; cmsg='Nenhum destes' não pode ser combinado com outras opções.
+r47: [end group] section_e
+r48: [end group] survey
+
+=== CHOICES (list | value | ENG | L2 [| filter]) ===
+-- list: yesno --
+   1 | ENG: Yes | L2: Sim
+   0 | ENG: No | L2: Não
+-- list: sex --
+   1 | ENG: Male | L2: Masculino
+   2 | ENG: Female | L2: Feminino
+-- list: education --
+   1 | ENG: Primary | L2: Primário
+   2 | ENG: Secondary | L2: Secundário
+   3 | ENG: Teacher training college | L2: Instituto de formação de professores
+   4 | ENG: University | L2: Universidade
+   -77 | ENG: Other, specify | L2: Outro, especifique
+-- list: meal_provider --
+   1 | ENG: Government program | L2: Programa do governo
+   2 | ENG: NGO | L2: ONG
+   3 | ENG: Community | L2: Comunidade
+   -77 | ENG: Other, specify | L2: Outro, especifique
+-- list: council_issues --
+   1 | ENG: Pupil attendance | L2: Assiduidade dos alunos
+   2 | ENG: School meals | L2: Refeições escolares
+   3 | ENG: Infrastructure | L2: Infra-estruturas
+   4 | ENG: Teacher performance | L2: Desempenho dos professores
+   5 | ENG: None of these | L2: Nenhum destes

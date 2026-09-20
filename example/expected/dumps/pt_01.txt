@@ -1,0 +1,77 @@
+# DOCX DUMP (tracked changes accepted): 1_school_head_PT.docx
+
+INQUÉRITO DEMO ÀS ESCOLAS PRIMÁRIAS — RONDA 2 (2026)
+INSTRUMENTO 1: QUESTIONÁRIO DO(A) DIRECTOR(A) DA ESCOLA
+Instrumento fictício para o exemplo inicial do capi-form-lifecycle. Todos os nomes e lugares são inventados. Texto português redigido automaticamente para fins de demonstração. Versão 20260105.
+SECÇÃO A. Identificação
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| A01 | Código da escola | Introduza o código de 4 dígitos da escola. |
+| A02 | Nome da escola | Pré-preenchido |
+| A03 | Distrito | Pré-preenchido |
+| A04 | Aldeia | Pré-preenchido |
+--- /TABLE ---
+
+Inquiridor(a), confirme antes de continuar: Código ${A01} · Escola ${A02} · Distrito ${A03}.
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| A05 | Inquiridor(a) | Lista |
+| A06 | Nome do(a) respondente (director(a) da escola) |  |
+--- /TABLE ---
+
+O meu nome é ${A05}. Trabalho para uma equipa de pesquisa sobre escolas primárias. A entrevista dura cerca de 20 minutos. As suas respostas são confidenciais e pode parar a qualquer momento.
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| consent | Concorda em participar? | 1 = Sim / 2 = Não |
+--- /TABLE ---
+
+SECÇÃO B. Respondente
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| B01 | Sexo do(a) respondente | 1 = Masculino / 2 = Feminino |
+| B02 | Idade (anos) | Se desconhecida, escreva -99. |
+| B03 | Anos como director(a) desta escola | 0 se menos de um ano. |
+| B04 | Número de telemóvel | 9 dígitos. Se não tem telefone, escreva -99. |
+| B05 | Nível de escolaridade mais elevado concluído | 1 = Primário / 2 = Secundário / 3 = Instituto de formação de professores / 4 = Universidade / 99 = Outro, especifique |
+| B05.1 | Outro, especifique: |  |
+| B06 | O seu telefone tem acesso à internet? | 1 = Sim / 2 = Não |
+--- /TABLE ---
+
+SECÇÃO C. Escola e alimentação escolar
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| C01 | Quantos alunos estão matriculados neste ano lectivo? | /__/__/__/ |
+| C02 | A escola tem um programa de alimentação escolar? | 1 = Sim / 2 = Não / Se Não >> Secção D |
+| C03 | Quem fornece as refeições? | 1 = Programa do governo / 2 = ONG / 3 = Comunidade / 4 = Associação de pais / 99 = Outro, especifique |
+| C03.1 | Outro, especifique: |  |
+| C04 | Em quantos dias por mês são servidas refeições? | /__/__/__/ |
+--- /TABLE ---
+
+SECÇÃO D. Professores
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| D01 | Quantos professores ensinam nesta escola? | /__/__/__/ |
+--- /TABLE ---
+
+Lista de professores (repetir para cada professor(a))
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| D02 | Nome do(a) professor(a) ${t_index} |  |
+| D03 | Sexo | 1 = Masculino / 2 = Feminino |
+| D04 | Ensina leitura na 3.ª classe? | 1 = Sim / 2 = Não |
+--- /TABLE ---
+
+SECÇÃO E. Conselho de escola
+
+--- TABLE ---
+| Código | Pergunta | Resposta |
+| E01 | A escola tem um conselho de escola? | 1 = Sim / 2 = Não / Se Não >> Fim |
+| E03 | Que assuntos o conselho discutiu este ano? | 1 = Assiduidade dos alunos / 2 = Refeições escolares / 3 = Infra-estruturas / 4 = Desempenho dos professores / 5 = Nenhum destes |
+--- /TABLE ---

@@ -1,0 +1,7 @@
+# Store text with LF line endings regardless of the contributor's OS; binaries detected automatically.
+* text=auto eol=lf
+
+# Explicitly binary (never normalise)
+*.xlsx binary
+*.docx binary
+*.pdf  binary

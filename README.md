@@ -5,7 +5,7 @@ data-collection round on SurveyCTO: **build** the XLSForm from the paper questio
 round's form, **patch** it while it is deployed, **diff** it against the paper, and regenerate the
 **paper** questionnaire from the form for training.
 
-Developed by Deboleena Rakshit at the International Food Policy Research Institute (IFPRI), assisted by Claude Code (Fable 5.1).
+Developed by Deboleena Rakshit from July to September, 2026, at the International Food Policy Research Institute (IFPRI), assisted by Claude Code (Fable 5.1).
 
 ## Why
 

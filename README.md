@@ -1,22 +1,22 @@
 # capi-form-lifecycle
 
-An [Agent Skill](https://agentskills.io/specification) for building, editing, and finalizing Computer-Assisted Personal Interviewing (CAPI) survey instruments for data collection on SurveyCTO (or similar platform). The skill runs **build** to generate the XLSForm from the paper questionnaire and any prior round's form; **patch** while it is deployed; **diff** against the paper questionnaire, and **paper** to regenerate the paper questionnaire from the final form.
+An [Agent Skill](https://agentskills.io/specification) for building, editing, and finalizing Computer-Assisted Personal Interviewing (CAPI) survey instruments for data collection on SurveyCTO (or similar ODK-based platforms). The skill runs **build** to generate the XLSForm from the paper questionnaire and any prior round's form; **patch** while it is deployed; **diff** against the paper questionnaire; and **paper** to regenerate the paper questionnaire from the final form.
 
-Developed by Deboleena Rakshit from July to September, 2026, at the International Food Policy Research Institute (IFPRI), assisted by Claude Code (Fable 5.1).
+Developed by Deboleena Rakshit from May to September, 2026, at the International Food Policy Research Institute (IFPRI), assisted by Claude Code (Fable 5.1).
 
 ## Why
 
-A CAPI survey round has to maintain version control and consistency across three streams of work: the paper questionnaire that investigators, research, or program teams sign off on; the electronic form(s) the tablets run; and, in the case of multiple rounds of data collection, any prior round's forms that data structures must stay comparable with. This can also often across multiple languages for most international development projects. 
+A CAPI survey round has to maintain version control and consistency across three streams of work: the paper questionnaire that investigators, research, or program teams sign off on; the electronic form(s) the tablets run; and, in the case of multiple rounds of data collection, any prior round's forms that data structures must stay comparable with. This also often spans multiple languages for most international development projects.
 
-A first (or "baseline") round has no prior form; the **build** mode then works from the paper questionnaire alone, and the CAPI Excel form it produces becomes the next round's (e.g., "midline" or "endline") input for **build**. 
+A first (or "baseline") round has no prior form; the **build** mode then works from the paper questionnaire alone, and the CAPI Excel form it produces becomes the next round's (e.g., "midline" or "endline") input for **build**.
 
-In practice, most of the work happens during the **patch** build of deployed forms. This refers to the process of implementing survey-level or item-level changes that can be *minor* (like tweaks to question wording, skip logic, response codes and labels) or *structural* (like adding survey modules or plugins), based on testing and piloting performed by the research or program teams. 
+In practice, most of the work happens during the **patch** build of deployed forms. This refers to the process of implementing survey-level or item-level changes that can be *minor* (like tweaks to question wording, skip logic, response codes and labels) or *structural* (like adding survey modules or plugins), based on testing and piloting performed by the research or program teams.
 
 This **patch** mode is complemented by a **diff** mode where any deviations from the paper questionnaire are checked by the AI agent and verified by the user as intentional before redeploying the updated form. The **diff** mode is also invoked when checking differences between iteratively updated versions of the CAPI forms.
 
 The final **paper** mode is an optional step where the AI agent uses this skill to generate a reader-friendly .pdf or .docx version of the CAPI Excel form to use during training for survey firms, or for circulating among research and program teams, doing away with the need for manually updating the paper version of the questionnaire after each iterative change to the form.
 
-This skill encodes this multi-step workflow so an AI agent can run it with the same discipline each time: a plan table signed off by the user (CAPI programmer) before any edits, a reproducible script for every change, validation by the user after the changes, and a changelog entry updated after each session.
+This skill encodes this multi-step workflow so an AI agent can run it with the same discipline each time: a plan table signed off by the user (CAPI programmer) before any edits, a reproducible script for every change, and a changelog entry after each change.
 
 ## What is in the box
 
@@ -110,7 +110,7 @@ This skill is a process skill. It makes an agent fluent in *your survey round* r
 platform, and covers ground the other two do not:
 
 - **Multi-round continuity.** BUILD takes the prior round's form and the new paper as joint inputs; PAPER
-  at the end of a round produces the next round's reference form. The other skills work on one form
+  at the end of a round produces the paper questionnaire which is the basis of the next round's CAPI reference form. The other skills work on one form
   instance with no concept of a round.
 - **Form-to-paper regeneration** as a training instrument (landscape Word document per language, grids
   for repeats, skip and constraint logic shown as markers), not just a text dump.
@@ -122,7 +122,7 @@ platform, and covers ground the other two do not:
   rather than data rows, folders the agent may never open.
 
 What the other skills cover that this doesn't (yet): unlike the official surveycto skill our skill does not store
-a full reference of SurveyCTO operators); unlike dmbwebb's skill we do not have a scripted upload to the server (our deployment step is a checklist a person follows because we want to keep the server control in the user's hands); finally SurveyCTO datasets, Data Explorer workbooks and field plug-ins are currently outside this skill's scope. 
+a full reference of SurveyCTO operators; unlike dmbwebb's skill we do not have a scripted upload to the server (our deployment step is a checklist a person follows because we want to keep the server control in the user's hands); finally SurveyCTO datasets, Data Explorer workbooks and field plug-ins are currently outside this skill's scope.
 
 Our validator overlaps these skills to some extent on syntax checks. This skill adds bilingual coverage, question-code conventions, and the
 intended-diff check that keeps a patch to its approved plan.
@@ -140,7 +140,7 @@ path, since that ensures there is a changelog and audit trail that is maintained
 - [SurveyCTO Agent Skill](https://github.com/surveycto/surveycto-agent-skill) (Dobility, Apache-2.0):
   SurveyCTO's own skill for designing, editing, debugging and converting XLSForms, server datasets,
   Data Explorer workbooks and field plug-ins, with an optional MCP server for live documentation
-  search. 
+  search.
 
 ## Status
 
@@ -149,4 +149,4 @@ each new project; contributions and issue reports are welcome.
 
 ## License
 
-MIT (see `LICENSE`). 
+MIT (see `LICENSE`).

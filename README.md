@@ -31,6 +31,7 @@ This skill encodes this multi-step workflow so an AI agent can run it with the s
 | `modes/diff.md` | Form vs paper, or version vs version, read-only findings table |
 | `modes/paper.md` | Regenerate the paper questionnaire from the deployed form |
 | `references/project_brief_TEMPLATE.md` | The 12 decisions a project fixes before the first run |
+| `references/testing_feedback_TEMPLATE.md` / `.docx` | Feedback sheet for testing and piloting rounds: one row per issue, fixed status values; PATCH reads the `Open` rows |
 | `references/deployment_checklist.md` | SurveyCTO server mechanics that break forms on tablets |
 | `references/xlsform_patterns.md` | 16 copyable coding patterns |
 | `references/tool_pitfalls.md` | openpyxl, OneDrive, expression and Stata traps |

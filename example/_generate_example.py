@@ -23,7 +23,8 @@ Writes:
   04_output_r2_capi/README.md, CHANGELOG.md, SESSION_FILE_CHANGES.md (empty logs)
 
 NOT written here: 01_input_paper_EN/20260105/1_school_head_EN.pdf is the EN docx printed to PDF once
-with Word (tracked changes accepted for print) and committed as a fixture for the PDF fallback.
+with Word (tracked changes accepted for print) and committed as a fixture for the PDF fallback;
+00_reference/r2_testing_feedback.md is a hand-written filled copy of references/testing_feedback_TEMPLATE.md.
 
 Planted Round-1 form vs Round-2 paper differences (what BUILD / DIFF should find):
   NEW            A04 village (prefilled; needs a `village` column upload_school.csv does not have)
@@ -45,6 +46,24 @@ from docx.oxml.ns import qn
 HERE = os.path.dirname(os.path.abspath(__file__))
 def P(*parts):
     p = os.path.join(HERE, *parts); os.makedirs(os.path.dirname(p), exist_ok=True); return p
+
+FROZEN_STAMP = "2026-01-05T00:00:00Z"          # fixed save time so regenerated fixtures are byte-identical
+FROZEN_ZIP_DT = (2026, 1, 5, 0, 0, 0)
+
+def freeze_timestamps(path):
+    """Office files (docx/xlsx) are zips that embed a save time in docProps/core.xml and in every zip
+    entry. Fix both, so re-running the generator does not make git see a change without content."""
+    import re
+    tmp = path + ".tmp"
+    with zipfile.ZipFile(path) as zin, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+            if item.filename == "docProps/core.xml":
+                data = re.sub(rb"(<dcterms:(created|modified)[^>]*>)[^<]*(</dcterms:\2>)", rb"\g<1>" + FROZEN_STAMP.encode() + rb"\g<3>", data)
+            zi = zipfile.ZipInfo(item.filename, date_time=FROZEN_ZIP_DT); zi.compress_type = zipfile.ZIP_DEFLATED
+            zi.external_attr = item.external_attr
+            zout.writestr(zi, data)
+    os.replace(tmp, path); return path
 
 PAPER_DATE = "20260105"
 R1_VERSION = 2501150001
@@ -589,9 +608,10 @@ def main():
     write_text("00_reference/capi_project_brief.md", BRIEF)
     write_text("00_reference/demo_id_suffix_registry.md", REGISTRY)
     write_text("00_reference/demo_glossary_EN_PT.md", GLOSSARY)
-    write_r1_form(P("03_input_prior_capi", "1_school_head_r1_v1.xlsx"))
-    write_paper(P("01_input_paper_EN", PAPER_DATE, "1_school_head_EN.docx"), "EN")
-    write_paper(P("02_input_paper_PT", PAPER_DATE, "1_school_head_PT.docx"), "PT")
+    for f in (write_r1_form(P("03_input_prior_capi", "1_school_head_r1_v1.xlsx")),
+              write_paper(P("01_input_paper_EN", PAPER_DATE, "1_school_head_EN.docx"), "EN"),
+              write_paper(P("02_input_paper_PT", PAPER_DATE, "1_school_head_PT.docx"), "PT")):
+        freeze_timestamps(f)
     write_csvs(); write_configs()
     write_text("04_output_r2_capi/README.md", "# Round-2 CAPI outputs\n\nBUILD writes `v1_draft/`; after upload the server download goes in `v1_deployed/`.\n\n| Version | form_id | Uploaded | Notes |\n|---|---|---|---|\n")
     write_text("CHANGELOG.md", "# Changelog — DEMO Primary School Survey\n\n(empty; BUILD and PATCH append here, newest on top)\n")

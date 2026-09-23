@@ -55,8 +55,10 @@ if os.path.exists(pe) and os.path.exists(pp):
     check(not re.search(r"\$\{(?!C0|E0|B0|D0|A0|consent)[A-Za-z_]+\}", "\n".join(p.text for p in de.paragraphs)), "paper: no leaked variables in body text")
     for sub in ("EN", "PT"):
         os.makedirs(os.path.join(HERE, "expected", "paper", sub), exist_ok=True)
-    shutil.copyfile(pe, os.path.join(HERE, "expected", "paper", "EN", os.path.basename(pe)))
-    shutil.copyfile(pp, os.path.join(HERE, "expected", "paper", "PT", os.path.basename(pp)))
+    sys.path.insert(0, HERE); from _generate_example import freeze_timestamps
+    for src, sub in ((pe, "EN"), (pp, "PT")):
+        dst = os.path.join(HERE, "expected", "paper", sub, os.path.basename(src))
+        shutil.copyfile(src, dst); freeze_timestamps(dst)      # byte-identical across runs
 else:
     check(False, "paper: batch wrote both language files")
 

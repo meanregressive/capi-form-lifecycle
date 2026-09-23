@@ -5,6 +5,32 @@ the first `/capi-form-lifecycle` run. The skill reads the brief at the start of 
 it as the authority for anything project-specific. **If a section is blank, the skill stops and
 asks.** Keep decisions dated and attributed; a future round will ask "why did we do it this way?"
 
+## Filling the brief with your agent (the default way)
+
+You do not have to fill this template by hand. Open your agent in the project folder and say
+"set up the CAPI project brief" (or run any `/capi-form-lifecycle` mode; the skill offers this step
+itself when the brief is missing or has blank sections). The agent then works section by section:
+
+1. **Infers first, asks second.** From the files already in the project it proposes: the instrument
+   register (paper and prior-round form filenames), the coding conventions, label columns,
+   `default_language`, constraint patterns and form_id pattern (from a prior-round XLSForm), the folder
+   layout (from the real tree), test IDs (from a preload CSV header row). You confirm or correct each
+   guess instead of typing it.
+2. **Asks only what files cannot tell it**, one section at a time, a few questions per turn: who
+   decides content, translation, preloads and deployment (§1); the authority order (§4); the
+   translation policy (§5); the data-governance boundary and folders it must never open (§3); the
+   server and dataset names (§8); who fills the testing-feedback sheet (§9).
+3. **Writes every answer as a dated, attributed decision** ("agreed 2026-01-02, PI"), so a later round
+   can see why.
+4. **Marks what you cannot answer yet as `[CONFIRM: <question>]`** instead of leaving the cell blank. A
+   blank section stops the skill; a `[CONFIRM]` marker lets work proceed and shows up in every report
+   until it is resolved.
+5. **Reads the result back to you** as a short summary before the first BUILD or PATCH, and edits the
+   brief in place, with a row in §12, whenever a decision changes later.
+
+Filling it manually works too: copy the file, fill every section, delete the options you did not
+choose. The rest of this template is the same either way.
+
 Conventions for filling it in:
 - Write decisions as facts with a date: "Yes/No coded 1/0 (agreed 2026-05-21, PI)".
 - Where the template offers options, delete the ones not chosen; leave the reasoning.
@@ -161,7 +187,7 @@ Choose one and delete the others. Record who chose it and when.
 | Translation flags | | fields carrying drafted text | skill |
 | Attachment audit | | per-form dataset/column/encoding audit | skill |
 | Session file changes | `SESSION_FILE_CHANGES.md` | every file touched, for syncing to the team share | skill |
-| Team testing feedback | | rows with Status; only OPEN rows are actioned | team |
+| Team testing feedback | `00_reference/<round>_testing_feedback.md` (or a shared Google Doc / Word file), from `references/testing_feedback_TEMPLATE.md` | one row per issue with Status; only `Open` rows are actioned; the skill writes Response and Status | team |
 
 ## 10. Folder layout (as it actually is)
 

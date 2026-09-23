@@ -29,8 +29,10 @@ conventions (codes, ID scheme, translation rules, authority order) every patch m
    drift. Ignore the benign round-trip artifacts SurveyCTO introduces: numeric to text in choices
    `value`/`filter`, `publishable` populated, leading/trailing whitespace trimmed, CRLF to LF.
 2. **The fix list.** One or more of:
-   - the team testing/feedback document (only rows whose status is OPEN; re-read statuses every
-     time, the team edits them);
+   - the team testing/feedback document (layout in `references/testing_feedback_TEMPLATE.md`; only
+     rows whose Status is `Open`; re-read statuses every time, the team edits them; after the patch
+     write `Fixed in vN`, `By design`, `Deferred` or `Paper-side` plus a one-line Response, and never
+     touch the tester's own columns);
    - the deferred-patches backlog (`00_reference/<round>_deferred_patches.md`), applied only when
      the user says the batch is open;
    - a DIFF-mode findings table (`findings_NN.md`);

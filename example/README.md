@@ -16,6 +16,7 @@ paper carries a PI comment thread and a tracked change, so DIFF and BUILD have r
 |---|---|
 | `00_reference/capi_project_brief.md` | the filled-in brief: every section the skill needs, with dated decisions |
 | `00_reference/demo_id_suffix_registry.md`, `demo_glossary_EN_PT.md` | the two small companions the brief names |
+| `00_reference/r2_testing_feedback.md` | a filled testing-feedback sheet (two `Open` rows, one `By design`, one fixed) for the PATCH walkthrough |
 | `01_input_paper_EN/20260105/1_school_head_EN.docx` | Round-2 paper, EN, with a comment thread on B06 and a tracked change on C01 |
 | `01_input_paper_EN/20260105/1_school_head_EN.pdf` | the same paper printed to PDF (Word, tracked changes shown as final), to try the PDF fallback |
 | `02_input_paper_PT/20260105/1_school_head_PT.docx` | Round-2 paper, PT, with one planted content misalignment (C04) |
@@ -26,7 +27,7 @@ paper carries a PI comment thread and a tracked change, so DIFF and BUILD have r
 | `05_python_scripts/paper_configs/` | PAPER-mode JSON config for instrument 1 and a `batch.json` |
 | `04_output_r2_capi/`, `CHANGELOG.md`, `SESSION_FILE_CHANGES.md` | empty; the modes write here |
 | `expected/` | what the scripts and DIFF should produce (dumps, paper docx, `findings_01.md`) |
-| `_generate_example.py` | writes every file above except this README and `expected/findings_01.md`; re-run after edits |
+| `_generate_example.py` | writes every file above except this README, `expected/findings_01.md` and `00_reference/r2_testing_feedback.md`; re-run after edits |
 | `run_checks.py` | runs the skill's scripts against the example and fails loudly if anything regressed |
 
 ## Try it
@@ -38,8 +39,9 @@ Open your agent (for example Claude Code) with `example/` as the working folder,
 2. `/capi-form-lifecycle build head --dry-run` — Phase B table only; compare with the same six rows.
 3. `/capi-form-lifecycle build head` — signs off, then writes `04_output_r2_capi/v1_draft/1_school_head_r2_v1.xlsx`
    and a build script under `05_python_scripts/`. Expect the A04 village column to be flagged, not invented.
-4. `/capi-form-lifecycle patch head` — pretend the built form is deployed (copy it to `v1_deployed/`)
-   and give a one-line fix, e.g. "B03 hint should say 0 if under one year in both languages".
+4. `/capi-form-lifecycle patch head` — pretend the built form is deployed (copy it to `v1_deployed/`).
+   The fix list is `00_reference/r2_testing_feedback.md`: expect a plan table with its two `Open` rows
+   (B03 hint in PT, E03 exclusive option) and the `By design` row left alone.
 5. `/capi-form-lifecycle paper head` — regenerates the paper from a form into `06_output_paper_FROMCAPI/EN` and `/PT`.
 
 Scripts on their own, from the repository root:

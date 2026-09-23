@@ -25,7 +25,10 @@ coding conventions; the identifier scheme; versioning and deployment rules; the 
 keeps; the folder layout; any known project-specific traps.
 
 **Nothing in this skill overrides the brief.** If the brief is missing or a section is blank, stop
-and offer to fill it from the template before doing anything else. If the brief and a mode file
+and offer to fill it from the template before doing anything else, following the template's
+"Filling the brief with your agent" procedure: infer from the project's files first, ask only what
+files cannot tell you, a few questions per turn, write dated decisions, mark unknowns
+`[CONFIRM: …]` rather than leaving blanks, read the summary back before the first build or patch. If the brief and a mode file
 disagree, follow the brief and tell the user the mode file needs updating.
 
 ## Step 1 — pick the mode
@@ -75,6 +78,7 @@ PI paper (all languages)
 ## Shared references
 
 - `references/project_brief_TEMPLATE.md` — what a project must decide up front (12 sections).
+- `references/testing_feedback_TEMPLATE.md` (+ `.docx`) — the testing/pilot feedback sheet PATCH reads: one row per issue, fixed Status vocabulary (`Open`, `Fixed in vN`, `By design`, `Deferred`, `Paper-side`), Response column for the programmer.
 - `references/deployment_checklist.md` — SurveyCTO server mechanics: enumerator dataset type, bindings on form_id change, version bump to push attachments, media limits, device re-sync, mirror rule.
 - `references/xlsform_patterns.md` — copyable coding patterns: yes/no with skip, other-specify, preload calc, role-based and cascaded IDs, group wrapper, repeat, per-item repeat, exclusive option, confirm-preload-with-fallback, settings block.
 - `references/tool_pitfalls.md` — openpyxl, OneDrive locks, anchored regex, `translate()` / `jr:choice-name()` on pulldata, Stata CRLF, Git Bash vs PowerShell for Stata.
